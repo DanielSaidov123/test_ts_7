@@ -1,0 +1,18 @@
+[
+  {
+    "id": "A1",
+    "name": "Night Vision",
+    "type": "optics",
+    "quantity": 9,
+    "pricePerUnit": 6000,
+    "hasImage": false
+  },
+  {
+    "id": "b1",
+    "name": "  Vision",
+    "type": "optics",
+    "quantity": 9,
+    "pricePerUnit": 6000,
+    "hasImage": false
+  }
+]

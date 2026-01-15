@@ -1,7 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  UseInterceptors,
+  Bind,
+  UploadedFile,
+} from '@nestjs/common';
 import { ApiService } from './api.service';
 import { CreateApiDto } from './dto/create-api.dto';
-import { UpdateApiDto } from './dto/update-api.dto';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('api')
 export class ApiController {
@@ -12,23 +19,10 @@ export class ApiController {
     return this.apiService.create(createApiDto);
   }
 
-  @Get()
-  findAll() {
-    return this.apiService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.apiService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateApiDto: UpdateApiDto) {
-    return this.apiService.update(+id, updateApiDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.apiService.remove(+id);
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('image'))
+  @Bind(UploadedFile())
+  uploadFile(file : File) {
+    return this.apiService.upfile(file)
   }
 }
